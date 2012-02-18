@@ -1,4 +1,4 @@
-package net.fiive.intern.iterators;
+package net.fiive.intern.random;
 
 import com.google.common.base.Preconditions;
 import net.fiive.intern.basic.PreconditionsExtensions;
@@ -36,6 +36,22 @@ public class RandomIterator<T> implements Iterator<T> {
 
 	public void remove() {
 		throw new UnsupportedOperationException("remove() is not supported");
+	}
+
+	public static class Builder<T> {
+
+		private final static Integer NUMBER_OF_ITEMS = 100;
+
+		private RandomItemRepository<T> repository;
+
+		public Builder(RandomItemRepository<T> repository) {
+			this.repository = repository;
+		}
+
+		public RandomIterator<T> build() {
+			return new RandomIterator<T>(repository.findUpToNItems(NUMBER_OF_ITEMS));
+		}
+
 	}
 
 	private class RandomComparator<T> implements Comparator<T> {

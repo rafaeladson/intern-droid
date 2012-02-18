@@ -1,13 +1,10 @@
-package net.fiive.intern.iterators;
+package net.fiive.intern.random;
 
+import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class RandomIteratorTest {
 
@@ -68,6 +65,22 @@ public class RandomIteratorTest {
 	public void removeShouldBeUnsupported() {
 		Iterator<Integer> iterator = new RandomIterator<Integer>(Arrays.asList(1,2,3));
 		iterator.remove();
+	}
+
+	@Test
+	@SuppressWarnings("unchecked")
+	public void shouldBeAbleToBuildIteratorThatReturnsThreeItems() {
+		List<Integer> itemsToReturn = Arrays.asList(1,2,3);
+		RandomItemRepository<Integer> repositoryStub = (RandomItemRepository<Integer>)Mockito.mock(RandomItemRepository.class);
+		Mockito.when(repositoryStub.findUpToNItems(100)).thenReturn(itemsToReturn);
+
+		RandomIterator.Builder<Integer> builder = new RandomIterator.Builder<Integer>(repositoryStub);
+		Iterator<Integer> iterator = builder.build();
+		Assert.assertTrue( iterator.hasNext());
+		iterator.next();
+		iterator.next();
+		iterator.next();
+		Assert.assertFalse(iterator.hasNext());
 	}
 
 }
