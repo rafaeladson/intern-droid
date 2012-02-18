@@ -42,7 +42,7 @@ public class RandomIteratorTest {
 		}
 	}
 
-	@Test
+	@Test(invocationCount = 10)
 	public void testIteratorWithTwoElements() {
 		RandomIterator<Integer> iterator = new RandomIterator<Integer>(Arrays.asList(1, 2));
 		Assert.assertTrue( iterator.hasNext() );
@@ -63,4 +63,11 @@ public class RandomIteratorTest {
 			Assert.assertEquals( exception.getMessage(), "Argument cannot contain a null element");
 		}
 	}
+
+	@Test(expectedExceptions = UnsupportedOperationException.class)
+	public void removeShouldBeUnsupported() {
+		Iterator<Integer> iterator = new RandomIterator<Integer>(Arrays.asList(1,2,3));
+		iterator.remove();
+	}
+
 }
