@@ -1,0 +1,16 @@
+*.class
+.classpath
+.project
+.settings/
+classes.dex
+*.apk
+*~
+/#.gitignore#
+bin/
+testng/test-output
+target/
+*.iml
+/.idea/
+/kotoba-droid/test-output/
+test-output/
+/kotoba/.externalToolBuilders/
