@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class RandomItemCursorTest {
+public class CircularItemCursorTest {
 
 	@Test
 	public void shouldBuildCursorForOneElement() {
 		final List<Integer> listWithOneElement = Arrays.asList(1);
 		RandomIterator.Builder<Integer> iteratorBuilderMock = buildMock(listWithOneElement);
 
-		RandomItemCursor<Integer> cursor = new RandomItemCursor<Integer>(iteratorBuilderMock);
+		CircularItemCursor<Integer> cursor = new CircularItemCursor<Integer>(iteratorBuilderMock);
 		Assert.assertEquals(cursor.getCurrent(), new Integer(1));
 		cursor.goToNext();
 		Assert.assertEquals(cursor.getCurrent(), new Integer(1));
@@ -36,7 +36,7 @@ public class RandomItemCursorTest {
 		final List<Integer> listWithTwoElements = Arrays.asList(1,2);
 		RandomIterator.Builder<Integer> iteratorBuilderMock = buildMock(listWithTwoElements);
 
-		RandomItemCursor<Integer> cursor = new RandomItemCursor<Integer>(iteratorBuilderMock);
+		CircularItemCursor<Integer> cursor = new CircularItemCursor<Integer>(iteratorBuilderMock);
 		Assert.assertEquals( cursor.getCurrent(), new Integer(1));
 		cursor.goToNext();
 		Assert.assertEquals( cursor.getCurrent(), new Integer(2));
@@ -59,7 +59,7 @@ public class RandomItemCursorTest {
 		RandomIterator.Builder<Integer> iteratorBuilder = buildMock(listWithZeroElements);
 
 		try {
-			RandomItemCursor<Integer> cursor = new RandomItemCursor<Integer>(iteratorBuilder);
+			CircularItemCursor<Integer> cursor = new CircularItemCursor<Integer>(iteratorBuilder);
 			Assert.fail();
 		} catch( IllegalStateException exception ) {
 			Assert.assertEquals( exception.getMessage(), "Error: iteratorBuilder instantiated an iterator that has no items!");
