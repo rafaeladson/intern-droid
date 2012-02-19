@@ -18,4 +18,17 @@ public class PreconditionsExtensions {
 			}
 		}
 	}
+
+	public static <T> void checkDoesNotContainNull(T[] array) {
+		checkDoesNotContainNull(array, "Argument cannot contain null");
+	}
+
+	public static <T> void checkDoesNotContainNull(T[] array, String message) {
+		Preconditions.checkNotNull(array);
+		for ( T item : array )  {
+			if ( item == null ) {
+				throw new NullPointerException(message);
+			}
+		}
+	}
 }

@@ -17,6 +17,13 @@ public class PreconditionsExtensionsTest {
 		PreconditionsExtensions.checkCollectionDoesNotContainNull(new HashSet<Object>());
 	}
 
+	@Test
+	public void shouldRunFineWithArrayThatDoesNotContainNull() {
+		PreconditionsExtensions.checkDoesNotContainNull(new Integer[] {1, 2, 3});
+		PreconditionsExtensions.checkDoesNotContainNull(new Integer[] {1});
+		PreconditionsExtensions.checkDoesNotContainNull(new Integer[] {});
+	}
+
 	@Test(dataProvider = "collectionsWithNull")
 	public void shouldThrowExceptionWhenCollectionContainsNull(Integer...collectionElements) {
 		List<Integer> collection = Arrays.asList(collectionElements);
@@ -31,6 +38,20 @@ public class PreconditionsExtensionsTest {
 			PreconditionsExtensions.checkCollectionDoesNotContainNull(collection, "message");
 			Assert.fail();
 		} catch( NullPointerException exception) {
+			Assert.assertEquals(exception.getMessage(), "message");
+		}
+
+		try {
+			PreconditionsExtensions.checkDoesNotContainNull(collectionElements);
+			Assert.fail();
+		} catch( NullPointerException exception) {
+			Assert.assertEquals( exception.getMessage(), "Argument cannot contain null");
+		}
+
+		try {
+			PreconditionsExtensions.checkDoesNotContainNull(collectionElements, "message");
+			Assert.fail();
+		} catch( NullPointerException exception ) {
 			Assert.assertEquals(exception.getMessage(), "message");
 		}
 	}

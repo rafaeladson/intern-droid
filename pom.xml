@@ -7,6 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>core</module>
+        <module>android</module>
     </modules>
     <packaging>pom</packaging>
     <name>intern</name>
@@ -20,6 +21,14 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- intern dependencies -->
+            <dependency>
+                <groupId>net.fiive.intern</groupId>
+                <artifactId>core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- core dependencies -->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
@@ -37,6 +46,15 @@
                 <version>1.9.0</version>
                 <scope>test</scope>
             </dependency>
+
+            <!-- android dependencies -->
+            <dependency>
+                <groupId>com.google.android</groupId>
+                <artifactId>android</artifactId>
+                <version>11</version>
+                <scope>provided</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -52,16 +70,16 @@
                 </configuration>
             </plugin>
             <plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<formats>
-						<format>xml</format>
-					</formats>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <formats>
+                        <format>xml</format>
+                    </formats>
                     <check/>
                 </configuration>
-			</plugin>
+            </plugin>
         </plugins>
     </build>
 </project>
