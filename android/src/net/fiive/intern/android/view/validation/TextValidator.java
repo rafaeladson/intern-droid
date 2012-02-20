@@ -1,0 +1,30 @@
+package net.fiive.intern.android.view.validation;
+
+import android.content.Context;
+import com.google.common.base.Preconditions;
+import net.fiive.intern.android.view.alerts.AlertHelper;
+
+public class TextValidator {
+
+	private Context context;
+	private AlertHelper alertHelper;
+
+	public TextValidator(Context context) {
+		Preconditions.checkNotNull(context);
+		this.context = context;
+		alertHelper = new AlertHelper();
+	}
+
+	public boolean validateTextIsFilled(String text, String message) {
+		boolean validated = text != null && !"".equals(text);
+		if( !validated) {
+			alertHelper.showErrorAlert(context, message, null);
+		}
+		return validated;
+	}
+
+	public void mockAlertHelper(AlertHelper helper) {
+		this.alertHelper = helper;
+	}
+
+}
