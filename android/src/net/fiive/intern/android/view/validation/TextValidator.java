@@ -3,6 +3,7 @@ package net.fiive.intern.android.view.validation;
 import android.content.Context;
 import com.google.common.base.Preconditions;
 import net.fiive.intern.android.view.alerts.AlertHelper;
+import net.fiive.intern.android.view.alerts.ErrorAlertInfo;
 
 public class TextValidator {
 
@@ -15,10 +16,10 @@ public class TextValidator {
 		alertHelper = new AlertHelper();
 	}
 
-	public boolean validateTextIsFilled(String text, String message) {
+	public boolean validateTextIsFilled(String text, ErrorAlertInfo alertInfo) {
 		boolean validated = text != null && !"".equals(text);
 		if( !validated) {
-			alertHelper.showErrorAlert(context, message, null);
+			alertHelper.showErrorAlert(context, alertInfo, null);
 		}
 		return validated;
 	}

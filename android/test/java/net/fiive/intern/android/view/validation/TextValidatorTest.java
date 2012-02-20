@@ -2,6 +2,7 @@ package net.fiive.intern.android.view.validation;
 
 import android.content.Context;
 import net.fiive.intern.android.view.alerts.AlertHelper;
+import net.fiive.intern.android.view.alerts.ErrorAlertInfo;
 import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -17,15 +18,17 @@ public class TextValidatorTest {
 	}
 
 
-
 	@Test
 	public void testValidText() {
 		TextValidator validator = new TextValidator(context);
 		AlertHelper mockedHelper = Mockito.mock(AlertHelper.class);
 		validator.mockAlertHelper(mockedHelper);
 
-		Assert.assertTrue( validator.validateTextIsFilled("foo", "foo"));
-		Assert.assertTrue( validator.validateTextIsFilled("f", "f"));
+		ErrorAlertInfo alertInfoA = createAlertInfoForString("foo");
+		ErrorAlertInfo alertInfoB = createAlertInfoForString("bar");
+
+		Assert.assertTrue(validator.validateTextIsFilled("foo", alertInfoA));
+		Assert.assertTrue(validator.validateTextIsFilled("f", alertInfoB));
 		Mockito.verifyNoMoreInteractions(mockedHelper);
 	}
 
@@ -35,12 +38,20 @@ public class TextValidatorTest {
 		AlertHelper mockedHelper = Mockito.mock(AlertHelper.class);
 		validator.mockAlertHelper(mockedHelper);
 
-		Assert.assertFalse(validator.validateTextIsFilled(null, "1"));
-		Mockito.verify(mockedHelper).showErrorAlert(context, "1", null);
+		ErrorAlertInfo alertInfoA = createAlertInfoForString("foo");
+		ErrorAlertInfo alertInfoB = createAlertInfoForString("bar");
 
-		Assert.assertFalse( validator.validateTextIsFilled("", "2"));
-		Mockito.verify(mockedHelper).showErrorAlert(context, "2", null);
+
+		Assert.assertFalse(validator.validateTextIsFilled(null, alertInfoA));
+		Mockito.verify(mockedHelper).showErrorAlert(context, alertInfoA, null);
+
+		Assert.assertFalse(validator.validateTextIsFilled("", alertInfoB));
+		Mockito.verify(mockedHelper).showErrorAlert(context, alertInfoB, null);
 
 		Mockito.verifyNoMoreInteractions(mockedHelper);
+	}
+
+	private ErrorAlertInfo createAlertInfoForString(String string) {
+		return new ErrorAlertInfo(string, string, string);
 	}
 }
