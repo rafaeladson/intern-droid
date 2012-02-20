@@ -1,5 +1,7 @@
 package net.fiive.intern.random;
 
+import java.util.List;
+
 /**
  * This is a wrapper around a iterator that will make the iterator continuously provides new items, instead of throwing
  * {@link java.util.NoSuchElementException} when the iterator runs out of items.
@@ -8,13 +10,13 @@ package net.fiive.intern.random;
  */
 public class CircularItemCursor<T> {
 
-	private RandomIterator.Builder<T> iteratorBuilder;
+	private List<T> items;
 	private RandomIterator<T> iterator;
 	private T currentItem;
 
-	public CircularItemCursor(RandomIterator.Builder<T> iteratorBuilder) {
-		this.iteratorBuilder = iteratorBuilder;
-		this.iterator = iteratorBuilder.build();
+	public CircularItemCursor(List<T> items) {
+		this.items = items;
+		this.iterator = new RandomIterator<T>(items);
 		goToNext();
 	}
 
@@ -23,7 +25,7 @@ public class CircularItemCursor<T> {
 	 */
 	public void goToNext() {
 		if ( !iterator.hasNext()) {
-			iterator = iteratorBuilder.build();
+			iterator = new RandomIterator<T>(items);
 		}
 		if ( iterator.hasNext()) {
 			currentItem = iterator.next();
@@ -39,6 +41,5 @@ public class CircularItemCursor<T> {
 			throw new IllegalStateException("Error: item is null. This should never happen");
 		}
 	}
-
 
 }
