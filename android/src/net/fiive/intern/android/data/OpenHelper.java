@@ -1,4 +1,4 @@
-package net.fiive.intern.data;
+package net.fiive.intern.android.data;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
