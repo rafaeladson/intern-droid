@@ -82,4 +82,9 @@
             </plugin>
         </plugins>
     </build>
+
+    <scm>
+      <developerConnection>scm:git:git@Weasley.local:intern-java</developerConnection>
+    </scm>
+
 </project>
