@@ -25,10 +25,34 @@ public class AlertHelper {
 			} ).show();
 	}
 
+	public void showRemoveAlert(Context context, RemoveAlertInfo removeAlertInfo, final Callback okCallback, final Callback cancelCallback) {
+		Preconditions.checkNotNull(context);
+		Preconditions.checkNotNull(removeAlertInfo);
+
+		new AlertDialog.Builder(context).setTitle(removeAlertInfo.getTitle()).setMessage(removeAlertInfo.getMessage()).
+			setPositiveButton(removeAlertInfo.getOkButtonName(), new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialogInterface, int i) {
+					if (okCallback != null) {
+						okCallback.notifyCallback();
+					}
+				}
+			}).setNegativeButton(removeAlertInfo.getCancelButtonName(), new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				if ( cancelCallback != null ) {
+					cancelCallback.notifyCallback();
+				}
+			}
+		}).show();
+	}
+
 
 	public static abstract class Callback {
 
-		private void notifyCallback() {
+		public void notifyCallback() {
 			this.onCallback();
 		}
 
