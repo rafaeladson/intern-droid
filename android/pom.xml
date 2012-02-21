@@ -8,7 +8,7 @@
     <parent>
         <groupId>net.fiive</groupId>
         <artifactId>intern</artifactId>
-        <version>0.1</version>
+        <version>0.2-SNAPSHOT</version>
     </parent>
 
     <name>intern-android</name>
