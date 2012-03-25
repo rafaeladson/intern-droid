@@ -1,0 +1,121 @@
+=pod
+
+=head1 Intern
+
+Intern is a framework that does whatever I don't want to do. It's supposed to be used in java and android applications to support development.
+
+I will be periodically posting things about intern on my "blog.":http://yetanotherdevelopersblog.blogspot.com/
+
+=head2 License
+
+Intern has BSD license, so that you can do anything you want with it, even using on commercial applications.
+
+The frameworks I use on Intern (including TestNG, Mockito and others) both have their own licenses.
+
+=head2 Subprojects
+
+Intern has the following subprojects
+
+=over
+
+=item B<core:> 
+
+The core. It should be framework and application type independent (which means: no spring, hibernate or android specific libraries here). 
+The only libraries core can depend are libraries like guava or apache-commons (additions to the core language that don't require some container to run).
+
+=item B<intern-android> 
+
+Android specific platform files. Used to speed up android applications development.
+
+=item B<intern-android-test> 
+
+Test files that should run in android emulators (dependent on Junit 3).
+It's better if the test can be done as a unit testing either on core or intern-android modules, but if that is not possible
+(because the test depends on android libraries and you want to do an integration test), then use this target instead.
+
+
+=back
+
+
+=head2 Building
+
+The first thing you gotta do is configure the android-sdk path. This could be done by running the maven targets with -Dandroid.sdk.home
+option, but the better way is to configure it in your settings.xml. Folllowing is my settings.xml so you can use as a template.
+
+  <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                        http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <profiles>
+      <profile>
+        <id>dev</id>
+        <activation>
+	  <activeByDefault>true</activeByDefault>
+        </activation>
+        <properties>
+	  <android.sdk.home>${user.home}/dev/android/sdk</android.sdk.home>
+        </properties>
+      </profile>
+    </profiles>
+  </settings>
+
+Anyway, after you configured the path to android sdk home, boot up an emulator (or connect your computer to an android device)
+and run mvn clean install and the project should build.
+
+=head2 Using
+
+Releases will be published on github as downloadable files. Each release will be published as a zip file with the following contents:
+
+=over
+
+=item B<intern-core-version.jar> 
+
+The core project
+
+=item B<intern-android-version.jar> 
+
+The jar so you can use intern as a dependency to your projects.
+
+
+=back
+
+Deploy these artifacts on your maven repository and you should be fine to go. You can configure your dependency to intern in your pom.xml like this:
+
+  <dependency> 
+    <groupId>net.fiive.intern</groupId> 
+    <artifactId>core</artifactId> 
+    <version>1.0-SNAPSHOT</version> 
+  </dependency> 
+  <dependency> 
+    <groupId>net.fiive.intern</groupId> 
+    <artifactId>android</artifactId> 
+    <version>1.0-SNAPSHOT</version> 
+  </dependency> 
+
+
+
+
+If there is people using android and having problems with this, I may consider creating a public nexus or deploying in a public repository. 
+
+The easiest way to use intern is to execute prepare_for_intern.sh in the root of your project, passing a URL for the zip file as a parameter. Please refer to the file
+to learn how it works.
+
+
+=head2 Contributing
+
+If you want to contribute, you're welcome to do so. But I have a few requirements to accept your contribution: 
+
+=over
+
+1. The code you do must have automatic tests wherever possible. 
+
+2.  It should build successfully from the command line (see building).
+
+=back
+
+Failure to comply to this will result on me not accepting your code (I'll try to post a comment though whenever I don't). 
+If you don't want to do it, I won't be mad if you clone to your own repository and commit on it using your own rules.
+
+You can also contribute with suggestions, but I won't make any promises I'll implement them.
+
+=cut
