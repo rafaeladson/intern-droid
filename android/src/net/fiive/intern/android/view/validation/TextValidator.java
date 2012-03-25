@@ -4,7 +4,7 @@ import android.widget.EditText;
 
 public class TextValidator {
 
-	public boolean validateTextIsFilled(EditText field, String textMessage) {
+	public boolean validateTextNotEmpty(EditText field, String textMessage) {
 		String text = field.getText().toString();
 		boolean validated = text != null && !"".equals(text);
 		if( !validated) {
