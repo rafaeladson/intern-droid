@@ -8,6 +8,7 @@
     <modules>
         <module>core</module>
         <module>android</module>
+        <module>android-test</module>
     </modules>
     <packaging>pom</packaging>
     <name>intern</name>
@@ -53,6 +54,17 @@
                 <artifactId>android</artifactId>
                 <version>11</version>
                 <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>net.fiive.intern</groupId>
+                <artifactId>android</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.fiive.intern</groupId>
+                <artifactId>android</artifactId>
+                <version>${project.version}</version>
+                <type>apk</type>
             </dependency>
 
         </dependencies>
