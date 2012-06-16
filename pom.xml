@@ -8,6 +8,7 @@
     <modules>
         <module>core</module>
         <module>android</module>
+        <module>android-testapp</module>
         <module>android-test</module>
     </modules>
     <packaging>pom</packaging>
@@ -60,6 +61,20 @@
                 <artifactId>android</artifactId>
                 <version>${project.version}</version>
                 <type>apklib</type>
+            </dependency>
+            <dependency>
+                <groupId>net.fiive.intern</groupId>
+                <artifactId>android-testapp</artifactId>
+                <version>${project.version}</version>
+                <type>jar</type>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>net.fiive.intern</groupId>
+                <artifactId>android-testapp</artifactId>
+                <version>${project.version}</version>
+                <type>apk</type>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>com.google.android</groupId>

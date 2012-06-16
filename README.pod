@@ -89,7 +89,8 @@ Deploy these artifacts on your maven repository and you should be fine to go. Yo
   <dependency> 
     <groupId>net.fiive.intern</groupId> 
     <artifactId>android</artifactId> 
-    <version>1.0-SNAPSHOT</version> 
+    <version>1.0-SNAPSHOT</version>
+    <type>apklib</type>
   </dependency> 
 
 
